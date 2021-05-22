@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block title%} Liste des Articles{% endblock %}
+
+{% block body %}
+<h2>liste des articles</h2>
+  <a href="{{ path('new_jouet')}}" class="btn btn-primary" style="float:right"> ajouter un jouet</a>
+
+ {% if jouets %}
+    <table id="jouet" class="table table-striped">
+      <thead>
+       
+        <tr>
+          <th>id</th>
+          <th>description</th>
+          <th>quantite</th>
+          <th>actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for jouet in jouets %}
+          <tr>
+            <td>{{ jouet.id}}</td>
+            <td>{{jouet.getDesJouet()}}</td>
+            <td>{{jouet.getQteStockJouet()}}</td>
+            <td>
+            <a href="/jouet/edit/{{ jouet.id }}" class="btn btn-outline-primary">Editer</a>
+           <a href="/jouet/delete/{{ jouet.id }}" class="btn btn-outline-danger" 
+              onclick="return confirm('Etes-vous sûr de supprimer cet article?');">Supprimer</a>
+
+            </td>
+
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Aucun article</p>
+  {% endif %} 
+  
+{% endblock %}
+
+
